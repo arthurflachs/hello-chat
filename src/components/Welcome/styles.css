@@ -55,7 +55,13 @@
 }
 
 .GreenButton {
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
   background-color: #9ea90a;
+  color: #e8e8e8;
+  border: 0;
+  outline: 0;
   padding: 1em;
   user-select: none;
   cursor: pointer;

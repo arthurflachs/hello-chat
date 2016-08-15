@@ -15,7 +15,9 @@ export default class Welcome extends Component {
     this.setState({ nickname: value });
   }
 
-  handleStartChat() {
+  handleStartChat(e) {
+    e.preventDefault();
+
     const { onStartChat } = this.props;
     typeof onStartChat === 'function' && onStartChat(this.state.nickname);
   }
@@ -30,18 +32,20 @@ export default class Welcome extends Component {
           <div className={styles.HelloLogoName}>Hello!</div>
         </div>
 
-        <div className={styles.HelloChooseNickname}>
-          <input
-            type="text"
-            placeholder="Choose a nickname..."
-            onChange={::this.handleNicknameChange}
-            value={this.state.value}
-          />
-        </div>
+        <form onSubmit={::this.handleStartChat}>
+          <div className={styles.HelloChooseNickname}>
+            <input
+              type="text"
+              placeholder="Choose a nickname..."
+              onChange={::this.handleNicknameChange}
+              value={this.state.value}
+            />
+          </div>
 
-        <div className={styles.HelloStartChatting}>
-          <div className={styles.GreenButton} onClick={::this.handleStartChat}>Start Chatting</div>
-        </div>
+          <div className={styles.HelloStartChatting}>
+            <button className={styles.GreenButton} type="submit">Start Chatting</button>
+          </div>
+        </form>
       </div>
     );
   }
