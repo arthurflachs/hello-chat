@@ -34,7 +34,7 @@ describe('', function() {
   describe('chat conversations', function() {
     it('can request a new conversation', function(done) {
 
-      createClient({ nickname: 'the_other' });
+      createClient({ nickname: 'the_other' }).then(client => client.emit('request chat'));
 
       createClient({ nickname: 'chat_tester' })
         .then(function(client) {
@@ -75,7 +75,7 @@ describe('', function() {
 
     it('can send a message', function(done) {
 
-      createClient({ nickname: 'the_other' });
+      createClient({ nickname: 'the_other' }).then(client => client.emit('request chat'));;
 
       createClient({ nickname: 'chat_tester' })
         .then(function(client) {
@@ -104,6 +104,7 @@ describe('', function() {
     it('can receive a message', function(done) {
 
       createClient({ nickname: 'the_other' }).then(function(client) {
+        client.emit('request chat');
         client.on('message received', function(message) {
           expect(message.content).toEqual('Coucou');
           expect(message.self).toEqual(false);
@@ -132,6 +133,7 @@ describe('', function() {
     it('can leave a conversation', function(done) {
 
       createClient({ nickname: 'the_other' }).then(function(client) {
+        client.emit('request chat');
         client.on('chat finished', function() {
           done();
         });
@@ -182,7 +184,7 @@ describe('', function() {
       createClient({ nickname: 'first' }).then(function(client) {
         client.disconnect();
 
-        createClient({ nickname: 'second' });
+        createClient({ nickname: 'second' }).then(client => client.emit('request chat'));
 
         createClient({ nickname: 'me' })
           .then(function(client) {
