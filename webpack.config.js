@@ -1,8 +1,17 @@
 module.exports = {
+  entry: './src/index.js',
+
+  output: {
+    path: './dist',
+    filename: 'bundle.js',
+    publicPath: '/',
+  },
+
   module: {
     loaders: [
-      { test: /\.css/, loader: 'style!css?modules&localIdentName=[path][name]---[local]', exclude: /node_modules/ },
-      { test: /\.css/, loader: 'style!css', include: /node_modules/ },
+      { test: /\.js$/, loader: 'babel', exclude: /node_modules/ },
+      { test: /\.css$/, loader: 'style!css?modules&localIdentName=[path][name]---[local]', exclude: /node_modules/ },
+      { test: /\.css$/, loader: 'style!css', include: /node_modules/ },
     ],
   },
 };
