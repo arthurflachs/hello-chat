@@ -118,7 +118,7 @@ describe('actions', function() {
     const store = mockStore({
       chatClient: {
         requestChat: function() {
-          return Promise.resolve({ chat: mockChat, onMessageReceived: () => {} });
+          return Promise.resolve(mockChat);
         }
       },
     });

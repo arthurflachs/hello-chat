@@ -8,7 +8,7 @@ const mockSocket = {
   on: (x, cb) => callbacks.set(x, cb),
 };
 
-const invokeCallback = x => callbacks.has(x) && callbacks.get(x)();
+const invokeCallback = (x, arg) => callbacks.has(x) && callbacks.get(x)(arg);
 
 
 describe('Chat Client', function() {
@@ -34,7 +34,7 @@ describe('Chat Client', function() {
     return chatPromise.then(client => {
       const requestChat = client.requestChat();
 
-      invokeCallback('chat started');
+      invokeCallback('chat started', { other: { nickname: 'other' } });
 
       return requestChat;
     }).then(function() {
@@ -50,7 +50,7 @@ describe('Chat Client', function() {
     return chatPromise.then(client => {
       const requestChat = client.requestChat()
 
-      invokeCallback('chat started');
+      invokeCallback('chat started', { other: { nickname: 'other' } });
 
       return requestChat;
     }).then(chat => {
@@ -72,7 +72,7 @@ describe('Chat Client', function() {
     chatPromise.then(client => {
       const requestChat = client.requestChat()
 
-      invokeCallback('chat started');
+      invokeCallback('chat started', { other: { nickname: 'other' } });
 
       return requestChat;
     }).then(chat => {
@@ -89,7 +89,7 @@ describe('Chat Client', function() {
     chatPromise.then(client => {
       const requestChat = client.requestChat()
 
-      invokeCallback('chat started');
+      invokeCallback('chat started', { other: { nickname: 'other' } });
 
       return requestChat;
     }).then(chat => {
