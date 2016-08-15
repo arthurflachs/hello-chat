@@ -1,0 +1,29 @@
+.Header {
+  height: 1em;
+  padding: 1em;
+  background-color: #e8e8e8;
+  color: #1a1a1a;
+  display: flex;
+}
+
+.HeaderTitle {
+  flex: 1;
+}
+
+.ChatIcon {
+  float: left;
+  padding-right: 1em;
+}
+
+.NewChat {
+  padding: 0 1em;
+}
+
+.MainContent {
+  padding: 3em;
+  max-width: 1280px;
+  height: calc(100vh - 3em);
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: auto;
+}

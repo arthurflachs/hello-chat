@@ -16,8 +16,6 @@
 }
 
 .HelloLogoIcon {
-  composes: icon-comment from global;
-
   font-size: 300px;
   color: #e8e8e8;
   text-shadow: 1px 1px 3px #fff, -1px -1px 3px #fff, 1px -1px 3px #fff, -1px 1px 3px #fff;

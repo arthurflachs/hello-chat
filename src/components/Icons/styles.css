@@ -1,0 +1,7 @@
+.ChatIcon {
+  composes: icon-comment from global;
+}
+
+.LogoutIcon {
+  composes: icon-enter from global;
+}

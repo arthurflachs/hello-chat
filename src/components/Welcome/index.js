@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from './styles.css';
+import { ChatIcon } from '../Icons';
 
 export default function Welcome() {
   return (
     <div className={styles.Welcome}>
       <div className={styles.HelloLogo}>
-        <div className={styles.HelloLogoIcon} />
+        <div className={styles.HelloLogoIcon}>
+          <ChatIcon />
+        </div>
         <div className={styles.HelloLogoName}>Hello!</div>
       </div>
 
