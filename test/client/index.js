@@ -54,7 +54,7 @@ describe('Chat Client', function() {
 
       return requestChat;
     }).then(chat => {
-      const sendMessage = chat.sendMessage('Coucou')
+      const sendMessage = chat.sendMessage({ content: 'Coucou' });
 
       invokeCallback('message sent');
 

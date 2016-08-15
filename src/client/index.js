@@ -15,8 +15,8 @@ const requestChat = (socket) => new Promise(function(resolve, reject) {
   });
 });
 
-const sendMessage = (socket, messageContent) => new Promise(function(resolve, reject) {
-  socket.emit('send message', { content: messageContent });
+const sendMessage = (socket, message) => new Promise(function(resolve, reject) {
+  socket.emit('send message', message);
 
   socket.on('message sent', resolve);
 });
