@@ -21,7 +21,6 @@ export default class Chat extends Component {
     e.preventDefault();
 
     const { onReply } = this.props;
-    console.log(this.state);
 
     typeof onReply === 'function' && onReply(this.state.replyContent);
   }

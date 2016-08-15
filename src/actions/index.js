@@ -37,9 +37,7 @@ export const receiveMessage = message => ({
 });
 
 export const leaveChat = (chatClient) => dispatch => {
-  return chatClient.leave().then(function() {
-    dispatch(chatFinished());
-  });
+  return chatClient.leave();
 };
 
 export const chatFinished = () => ({
@@ -75,7 +73,6 @@ export const message = (chat, message) => dispatch => {
   dispatch(sendMessage(message));
 
   return chat.sendMessage(message).then(function(sent) {
-    console.log(message, sent);
     dispatch(messageSent(sent));
   });
 }

@@ -18,6 +18,8 @@ export function createServer(port = 12222) {
   }
 
   function registerUser(socket, user) {
+    user.status = 'AVAILABLE';
+
     usersSet = usersSet.concat(user);
     usersSocket.set(user, socket);
     socket.emit('user registered');
@@ -58,6 +60,9 @@ export function createServer(port = 12222) {
   }
 
   function leaveCurrentChat(userSocket, user, other) {
+    user.status = 'AVAILABLE';
+    other.status = 'AVAILABLE';
+
     userSocket.removeAllListeners('send message');
     userSocket.removeAllListeners('leave chat');
 
@@ -71,9 +76,18 @@ export function createServer(port = 12222) {
   }
 
   function requestChat(socket, user) {
-    const other = shuffle(usersSet.slice()).find(someone => someone.nickname !== user.nickname);
+    if (user.status === 'REQUESTING') {
+      return false;
+    }
+
+    user.status = 'REQUESTING';
+    const other = shuffle(usersSet.slice()).find(someone =>
+        someone !== user && someone.status !== 'NOT AVAILABLE'
+    );
 
     if (other) {
+      user.status = 'NOT AVAILABLE';
+      other.status = 'NOT AVAILABLE';
       startChat(socket, user, other);
     }
   }

@@ -1,6 +1,6 @@
 const requestChat = (socket) => new Promise(function(resolve, reject) {
-  const messagesReceivedCallback = [];
-  const chatFinishedCallbacks = [];
+  let messagesReceivedCallback = [];
+  let chatFinishedCallbacks = [];
 
   socket.emit('request chat');
 
@@ -18,6 +18,8 @@ const requestChat = (socket) => new Promise(function(resolve, reject) {
 
   socket.on('chat finished', function() {
     chatFinishedCallbacks.forEach(cb => cb());
+    chatFinishedCallbacks = [];
+    messagesReceivedCallback = [];
   });
 });
 
