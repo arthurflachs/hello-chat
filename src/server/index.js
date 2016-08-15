@@ -5,11 +5,11 @@ let usersSocket = new Map();
 let usersAlreadyTalkedTo = new Map();
 
 // TODO: global problem
-export function createServer(port = 12222) {
+export function createServer(port = 12222, host = '127.0.0.1') {
   const app = http.createServer();
   const io = require('socket.io')(app);
 
-  app.listen(port);
+  app.listen(port, host);
 
   io.on('connection', socket => handleConnection(socket));
 
