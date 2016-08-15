@@ -29,7 +29,7 @@ const mapStateToProps = ({ currentChat, chatMessages, chatClient }) =>
 
 const mapDispatchToProps = (dispatch, props) => ({
   registerUser: function(nickname) {
-    const socket = io('http://localhost:12222');
+    const socket = io('http://192.168.1.3:12222');
 
     return dispatch(registerUser(nickname, socket)).then(function(client) {
       return dispatch(newChat(client.chatClient));

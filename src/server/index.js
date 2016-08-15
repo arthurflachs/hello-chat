@@ -47,6 +47,9 @@ export function createServer(port = 12222, host = '127.0.0.1') {
     userSocket.on('leave chat', leaveCurrentChat.bind(null, userSocket, user, other));
     otherSocket.on('leave chat', leaveCurrentChat.bind(null, otherSocket, other, user));
 
+    userSocket.on('disconnect', leaveCurrentChat.bind(null, userSocket, user, other));
+    otherSocket.on('disconnect', leaveCurrentChat.bind(null, otherSocket, other, user));
+
     const userTalkedTo = usersAlreadyTalkedTo.get(user) || [];
     usersAlreadyTalkedTo.set(user, userTalkedTo.concat(other));
 
@@ -82,7 +85,7 @@ export function createServer(port = 12222, host = '127.0.0.1') {
 
     user.status = 'REQUESTING';
     const other = shuffle(usersSet.slice()).find(someone =>
-        someone !== user && someone.status !== 'NOT AVAILABLE'
+        someone !== user && someone.status === 'REQUESTING'
     );
 
     if (other) {

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot",
+    "start": "concurrently 'npm run start:ui' 'npm run start:server'",
+    "start:ui": "webpack-dev-server --inline --hot --host 0.0.0.0",
+    "start:server": "babel-node ./bin/server-runner.js --host 0.0.0.0",
     "test": "mocha --compilers js:babel-register --recursive",
     "storybook": "start-storybook -p 9001"
   },
@@ -27,6 +29,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "babel-cli": "^6.11.4",
+    "concurrently": "^2.2.0",
     "knuth-shuffle": "^1.0.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
