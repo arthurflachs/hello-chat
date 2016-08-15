@@ -20,7 +20,6 @@
 }
 
 .MainContent {
-  padding: 3em;
   max-width: 1280px;
   height: calc(100vh - 3em);
   box-sizing: border-box;
