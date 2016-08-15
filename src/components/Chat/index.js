@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './styles.css';
 import Message from '../Message';
 
@@ -8,24 +8,54 @@ function renderMessages(messages) {
   ));
 }
 
-export default function Chat({ onReply, messages = [] }) {
-  return (
-    <div className={styles.Chat}>
-      <div className={styles.MessagesList}>
-        {renderMessages(messages)}
-      </div>
+export default class Chat extends Component {
+  constructor(props) {
+    super(props);
 
-      <div className={styles.ChatReply}>
-        <form onSubmit={reply}>
-          <input type="text" placeholder="Type your reply ..." className={styles.ChatReplyInput} />
-        </form>
-      </div>
-    </div>
-  );
+    this.state = {
+      replyContent: '',
+    };
+  }
 
-  function reply(e) {
+  reply(e) {
     e.preventDefault();
 
-    typeof onReply === 'function' && onReply();
+    const { onReply } = this.props;
+    console.log(this.state);
+
+    typeof onReply === 'function' && onReply(this.state.replyContent);
+  }
+
+  handleInputChange(e) {
+    e.preventDefault();
+
+    const { value } = e.target;
+
+    this.setState({ replyContent: value });
+  }
+
+  render() {
+    const { replyContent } = this.state;
+    const { messages } = this.props;
+
+    return (
+      <div className={styles.Chat}>
+        <div className={styles.MessagesList}>
+          {renderMessages(messages)}
+        </div>
+
+        <div className={styles.ChatReply}>
+          <form onSubmit={::this.reply}>
+            <input
+              type="text"
+              placeholder="Type your reply ..."
+              className={styles.ChatReplyInput}
+              value={replyContent}
+              onChange={::this.handleInputChange}
+            />
+          </form>
+        </div>
+      </div>
+    );
   }
 }
