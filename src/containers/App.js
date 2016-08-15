@@ -6,18 +6,18 @@ import Layout from '../components/Layout';
 import Chat from '../components/Chat';
 import { registerUser, newChat } from '../actions';
 
-function App({ registerUser, currentChat }) {
+function App({ registerUser, currentChat, chatMessages }) {
   console.log(currentChat);
   return currentChat ? (
     <Layout title={currentChat.other && currentChat.other.nickname}>
-      <Chat />
+      <Chat messages={chatMessages} />
     </Layout>
   ) : (
     <Welcome onStartChat={registerUser}/>
   );
 }
 
-const mapStateToProps = ({ currentChat }) => ({ currentChat });
+const mapStateToProps = ({ currentChat, chatMessages }) => ({ currentChat, chatMessages });
 
 const mapDispatchToProps = dispatch => ({
   registerUser: function(nickname) {

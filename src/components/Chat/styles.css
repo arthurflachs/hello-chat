@@ -23,33 +23,3 @@
   background-color: inherit;
   padding: 1em;
 }
-
-.Message {
-  display: flex;
-  margin-bottom: 1em;
-}
-
-.Message_Self {
-  composes: Message;
-
-  flex-direction: row-reverse;
-}
-
-.MessageContent {
-  flex: 1;
-  background-color: green;
-  padding: 1em;
-  border: 1px solid #333;
-}
-
-.Message_Self .MessageContent {
-  background-color: blue;
-}
-
-.MessageAvatar {
-  width: 3em;
-  height: 3em;
-  background-color: #e8e8e8;
-  margin: 1em;
-  border-radius: 50%;
-}
