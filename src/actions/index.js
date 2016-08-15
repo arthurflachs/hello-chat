@@ -36,9 +36,11 @@ export const receiveMessage = message => ({
   message,
 });
 
-export const leaveChat = () => ({
-  type: types.LEAVE_CHAT,
-});
+export const leaveChat = (chatClient) => dispatch => {
+  return chatClient.leave().then(function() {
+    dispatch(chatFinished());
+  });
+};
 
 export const chatFinished = () => ({
   type: types.CHAT_FINISHED,
@@ -58,6 +60,10 @@ export const newChat = client => dispatch => {
   return client.requestChat().then((chat) => {
     chat.onMessageReceived(function(message) {
       dispatch(receiveMessage(message));
+    });
+
+    chat.onChatFinished(function() {
+      dispatch(chatFinished());
     });
 
     return dispatch(chatStarted(chat))

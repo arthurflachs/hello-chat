@@ -1,17 +1,23 @@
 const requestChat = (socket) => new Promise(function(resolve, reject) {
   const messagesReceivedCallback = [];
+  const chatFinishedCallbacks = [];
 
   socket.emit('request chat');
 
   socket.on('chat started', ({ other }) => resolve({
     sendMessage: sendMessage.bind(null, socket),
     onMessageReceived: cb => messagesReceivedCallback.push(cb),
+    onChatFinished: cb => chatFinishedCallbacks.push(cb),
     leave: leave.bind(null, socket),
     other,
   }));
 
   socket.on('message received', function(message) {
     messagesReceivedCallback.forEach(cb => cb(message));
+  });
+
+  socket.on('chat finished', function() {
+    chatFinishedCallbacks.forEach(cb => cb());
   });
 });
 
@@ -23,8 +29,6 @@ const sendMessage = (socket, message) => new Promise(function(resolve, reject) {
 
 const leave = socket => new Promise(function(resolve) {
   socket.emit('leave chat');
-
-  socket.on('chat finished', resolve);
 });
 
 export default function chatClient(nickname, socket) {

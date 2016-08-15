@@ -16,7 +16,7 @@ function App({ chatClient, registerUser, replyChat, currentChat, chatMessages, n
     replyChat(currentChat, messageContent);
   }
   return currentChat ? (
-    <Layout title={currentChat.other && currentChat.other.nickname} onNextChat={nextChat.bind(null, chatClient)}>
+    <Layout title={currentChat.other && currentChat.other.nickname} onNextChat={nextChat.bind(null, currentChat, chatClient)}>
       <Chat messages={chatMessages} onReply={reply} />
     </Layout>
   ) : (
@@ -40,8 +40,8 @@ const mapDispatchToProps = (dispatch, props) => ({
       content: replyContent,
     }));
   },
-  nextChat: function(chatClient) {
-    dispatch(leaveChat());
+  nextChat: function(chat) {
+    dispatch(leaveChat(chat));
   },
 });
 
