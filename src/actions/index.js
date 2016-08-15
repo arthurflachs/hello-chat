@@ -67,7 +67,7 @@ export const newChat = client => dispatch => {
 export const message = (chat, message) => dispatch => {
   dispatch(sendMessage(message));
 
-  return chat.sendMessage(message).then(function() {
-    dispatch(messageSent(message));
+  return chat.sendMessage(message).then(function(sent) {
+    dispatch(messageSent(sent));
   });
 }

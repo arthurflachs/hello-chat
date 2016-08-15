@@ -4,7 +4,7 @@ import Message from '../Message';
 
 function renderMessages(messages) {
   return messages.map((message, i) => (
-    <Message content={message.content} key={i} />
+    <Message content={message.content} key={i} self={!!message.self} />
   ));
 }
 
