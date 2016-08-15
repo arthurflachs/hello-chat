@@ -22,6 +22,15 @@ export function createServer(port = 12222) {
     socket.emit('user registered');
 
     socket.on('request chat', requestChat.bind(null, socket, user));
+    socket.on('disconnect', unregisterUser.bind(null, user));
+  }
+
+  function unregisterUser(user) {
+    const index = usersSet.indexOf(user);
+    usersSet = [
+      ...usersSet.slice(0, index),
+      ...usersSet.slice(index + 1),
+    ];
   }
 
   function startChat(userSocket, user, other) {
@@ -43,8 +52,8 @@ export function createServer(port = 12222) {
   }
 
   function sendMessage(userSocket, otherSocket, message) {
-    otherSocket.emit('message received', message);
-    userSocket.emit('message sent', message);
+    otherSocket.emit('message received', Object.assign({}, message, { self: false }));
+    userSocket.emit('message sent', Object.assign({}, message, { self: true }));
   }
 
   function leaveCurrentChat(userSocket, user, other) {

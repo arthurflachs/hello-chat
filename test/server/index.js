@@ -91,6 +91,7 @@ describe('', function() {
 
             client.on('message sent', function(message) {
               expect(message.content).toEqual('Coucou');
+              expect(message.self).toEqual(true);
 
               done();
             });
@@ -105,6 +106,7 @@ describe('', function() {
       createClient({ nickname: 'the_other' }).then(function(client) {
         client.on('message received', function(message) {
           expect(message.content).toEqual('Coucou');
+          expect(message.self).toEqual(false);
 
           done();
         });
@@ -174,6 +176,24 @@ describe('', function() {
             done();
           });
         });
+    });
+
+    it('disconnects a user when he has quit', function(done) {
+      createClient({ nickname: 'first' }).then(function(client) {
+        client.disconnect();
+
+        createClient({ nickname: 'second' });
+
+        createClient({ nickname: 'me' })
+          .then(function(client) {
+            client.emit('request chat');
+
+            client.on('chat started', function(chat) {
+              expect(chat.other.nickname).toEqual('second');
+              done();
+            });
+          });
+      });
     });
 
   });
