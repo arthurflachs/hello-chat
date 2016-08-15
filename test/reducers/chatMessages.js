@@ -22,4 +22,10 @@ describe('chatMessages reducer', function() {
     })).toEqual([1, 2]);
   });
 
+  it('handles CHAT_FINISHED action', function() {
+    expect(reducer([1,2,3], {
+      type: types.CHAT_FINISHED,
+    })).toEqual([]);
+  });
+
 });

@@ -32,4 +32,12 @@ describe('currentChat reducer', function() {
     })).toEqual(null);
   });
 
+  it('handles CHAT_FINISHED action', function() {
+    expect(reducer({
+      chat: {},
+    }, {
+      type: types.CHAT_FINISHED,
+    })).toEqual(null);
+  });
+
 });

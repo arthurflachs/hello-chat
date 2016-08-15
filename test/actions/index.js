@@ -79,14 +79,6 @@ describe('actions', function() {
     expect(actions.receiveMessage(message)).toEqual(expected);
   });
 
-  it('should create an action to leave a chat', function() {
-    const expected = {
-      type: types.LEAVE_CHAT,
-    };
-
-    expect(actions.leaveChat()).toEqual(expected);
-  });
-
   it('should create an action when a chat session is done', function() {
     const expected = {
       type: types.CHAT_FINISHED,
@@ -114,7 +106,11 @@ describe('actions', function() {
   });
 
   it('creates REQUEST_CHAT and CHAT_STARTED after creating a new chat', function() {
-    const mockChat = { other: { nickname: 'Ghost' }, onMessageReceived: () => {} };
+    const mockChat = {
+      other: { nickname: 'Ghost' },
+      onMessageReceived: () => {},
+      onChatFinished: () => {},
+    };
     const store = mockStore({
       chatClient: {
         requestChat: function() {
@@ -137,9 +133,10 @@ describe('actions', function() {
     const store = mockStore({
       currentChat: {
         sendMessage: function() {
-          return Promise.resolve();
+          return Promise.resolve(message);
         },
         onMessageReceived: () => {},
+        onChatFinished: () => {},
       },
     });
 

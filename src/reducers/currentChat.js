@@ -1,4 +1,4 @@
-import { CHAT_STARTED, REQUEST_CHAT, LEAVE_CHAT } from '../actions/types';
+import { CHAT_STARTED, REQUEST_CHAT, LEAVE_CHAT, CHAT_FINISHED } from '../actions/types';
 
 export default function currentChat(state = null, action) {
   switch (action.type) {
@@ -7,6 +7,7 @@ export default function currentChat(state = null, action) {
     case REQUEST_CHAT:
       return { loading: true };
     case LEAVE_CHAT:
+    case CHAT_FINISHED:
       return null;
     default:
       return state;
