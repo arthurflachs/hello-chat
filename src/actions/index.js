@@ -55,7 +55,7 @@ export const registerUser = (nickname, socket) => dispatch => {
 export const newChat = client => dispatch => {
   dispatch(requestChat());
 
-  return client.requestChat().then(({ chat }) => {
+  return client.requestChat().then((chat) => {
     chat.onMessageReceived(function(message) {
       dispatch(receiveMessage(message));
     });

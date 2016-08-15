@@ -2,13 +2,13 @@ import React from 'react';
 import styles from './styles.css';
 import { ChatIcon, LogoutIcon } from '../Icons';
 
-export default function Layout({ children }) {
+export default function Layout({ children, title = 'Hello Chat' }) {
   return (
     <div>
       <header className={styles.Header}>
         <div className={styles.HeaderTitle}>
           <span className={styles.ChatIcon}><ChatIcon /></span>
-          <span className={styles.ChatTitle}>Hello Chat</span>
+          <span className={styles.ChatTitle}>{title}</span>
         </div>
 
         <div className={styles.NewChat}>

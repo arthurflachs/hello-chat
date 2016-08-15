@@ -1,26 +1,13 @@
-export default function chatClient(nickname, socket) {
-  return new Promise(function(resolve, reject) {
-    const user = { nickname };
-
-    socket.emit('register user', user);
-
-    socket.on('user registered', function() {
-      return resolve({
-        requestChat: requestChat.bind(null, socket),
-      });
-    });
-  });
-}
-
 const requestChat = (socket) => new Promise(function(resolve, reject) {
   const messagesReceivedCallback = [];
 
   socket.emit('request chat');
 
-  socket.on('chat started', () => resolve({
+  socket.on('chat started', ({ other }) => resolve({
     sendMessage: sendMessage.bind(null, socket),
     onMessageReceived: cb => messagesReceivedCallback.push(cb),
     leave: leave.bind(null, socket),
+    other,
   }));
 
   socket.on('message received', function(message) {
@@ -39,3 +26,17 @@ const leave = socket => new Promise(function(resolve) {
 
   socket.on('chat finished', resolve);
 });
+
+export default function chatClient(nickname, socket) {
+  return new Promise(function(resolve, reject) {
+    const user = { nickname };
+
+    socket.emit('register user', user);
+
+    socket.on('user registered', function() {
+      return resolve({
+        requestChat: requestChat.bind(null, socket),
+      });
+    });
+  });
+}

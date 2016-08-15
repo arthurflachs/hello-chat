@@ -7,6 +7,8 @@ module.exports = {
     publicPath: '/',
   },
 
+  devtool: 'eval-source-map',
+
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel', exclude: /node_modules/ },

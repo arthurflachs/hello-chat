@@ -4,7 +4,7 @@ let usersSocket = new Map();
 let usersAlreadyTalkedTo = new Map();
 
 // TODO: global problem
-export function createServer(port) {
+export function createServer(port = 12221) {
   const app = http.createServer();
   const io = require('socket.io')(app);
 
