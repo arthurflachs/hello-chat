@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.css';
 import { ChatIcon, LogoutIcon } from '../Icons';
 
-export default function Layout({ children, title = 'Hello Chat' }) {
+export default function Layout({ children, title = 'Hello Chat', onNextChat }) {
   return (
     <div>
       <header className={styles.Header}>
@@ -11,7 +11,7 @@ export default function Layout({ children, title = 'Hello Chat' }) {
           <span className={styles.ChatTitle}>{title}</span>
         </div>
 
-        <div className={styles.NewChat}>
+        <div className={styles.NewChat} onClick={onNextChat}>
           <span>New Chat</span>
         </div>
 

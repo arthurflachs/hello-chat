@@ -4,9 +4,9 @@ import io from 'socket.io-client';
 import Welcome from '../components/Welcome';
 import Layout from '../components/Layout';
 import Chat from '../components/Chat';
-import { registerUser, newChat, message } from '../actions';
+import { registerUser, newChat, message, leaveChat } from '../actions';
 
-function App({ registerUser, replyChat, currentChat, chatMessages }) {
+function App({ chatClient, registerUser, replyChat, currentChat, chatMessages, nextChat }) {
   function reply(messageContent) {
     console.log('OH?!', currentChat)
     if (!typeof replyChat === 'function' || !currentChat || currentChat.loading) {
@@ -16,7 +16,7 @@ function App({ registerUser, replyChat, currentChat, chatMessages }) {
     replyChat(currentChat, messageContent);
   }
   return currentChat ? (
-    <Layout title={currentChat.other && currentChat.other.nickname}>
+    <Layout title={currentChat.other && currentChat.other.nickname} onNextChat={nextChat.bind(null, chatClient)}>
       <Chat messages={chatMessages} onReply={reply} />
     </Layout>
   ) : (
@@ -24,7 +24,8 @@ function App({ registerUser, replyChat, currentChat, chatMessages }) {
   );
 }
 
-const mapStateToProps = ({ currentChat, chatMessages }) => ({ currentChat, chatMessages });
+const mapStateToProps = ({ currentChat, chatMessages, chatClient }) =>
+  ({ currentChat, chatMessages, chatClient });
 
 const mapDispatchToProps = (dispatch, props) => ({
   registerUser: function(nickname) {
@@ -38,7 +39,10 @@ const mapDispatchToProps = (dispatch, props) => ({
     return dispatch(message(currentChat, {
       content: replyContent,
     }));
-  }
+  },
+  nextChat: function(chatClient) {
+    dispatch(leaveChat());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

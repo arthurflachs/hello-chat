@@ -13,7 +13,7 @@ const messages = [
 
 storiesOf('Chat', module)
   .add('default', () => (
-    <Layout>
+    <Layout onNextChat={action('NEW CHAT')}>
       <Chat onReply={action('REPLIED')} messages={messages} />
     </Layout>
   ));
