@@ -23,6 +23,8 @@ export default class Chat extends Component {
     const { onReply } = this.props;
 
     typeof onReply === 'function' && onReply(this.state.replyContent);
+
+    this.setState({ replyContent: '' });
   }
 
   handleInputChange(e) {
