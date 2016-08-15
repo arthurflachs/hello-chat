@@ -3,8 +3,8 @@ import styles from './styles.css';
 import Message from '../Message';
 
 function renderMessages(messages) {
-  return messages.map(message => (
-    <Message content={message.content} />
+  return messages.map((message, i) => (
+    <Message content={message.content} key={i} />
   ));
 }
 
