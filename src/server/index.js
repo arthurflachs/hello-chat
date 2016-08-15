@@ -1,3 +1,4 @@
+const { knuthShuffle: shuffle } = require('knuth-shuffle')
 const http = require('http');
 let usersSet = [];
 let usersSocket = new Map();
@@ -70,7 +71,7 @@ export function createServer(port = 12222) {
   }
 
   function requestChat(socket, user) {
-    const other = usersSet.find(someone => someone.nickname !== user.nickname);
+    const other = shuffle(usersSet.slice()).find(someone => someone.nickname !== user.nickname);
 
     if (other) {
       startChat(socket, user, other);
