@@ -70,10 +70,7 @@ export function createServer(port = 12222) {
   }
 
   function requestChat(socket, user) {
-    const other = usersSet.find(someone =>
-        someone.nickname !== user.nickname
-      && (usersAlreadyTalkedTo.get(user) || []).indexOf(someone) === -1
-    );
+    const other = usersSet.find(someone => someone.nickname !== user.nickname);
 
     if (other) {
       startChat(socket, user, other);

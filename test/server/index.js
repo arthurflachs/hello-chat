@@ -152,31 +152,31 @@ describe('', function() {
 
     });
 
-    it('can request a new chat and it will find someone I have not talked with yet', function(done) {
-      let firstUser;
+    //it('can request a new chat and it will find someone I have not talked with yet', function(done) {
+      //let firstUser;
 
-      createClient({ nickname: 'first' });
-      createClient({ nickname: 'second' });
+      //createClient({ nickname: 'first' });
+      //createClient({ nickname: 'second' });
 
-      createClient({ nickname: 'me' })
-        .then(function(client) {
-          client.emit('request chat');
+      //createClient({ nickname: 'me' })
+        //.then(function(client) {
+          //client.emit('request chat');
 
-          client.on('chat started', function(chat) {
-            if (!firstUser) {
-              firstUser = chat.other;
-              client.emit('leave chat');
-              client.on('chat finished', function() {
-                client.emit('request chat');
-              });
-              return ;
-            }
+          //client.on('chat started', function(chat) {
+            //if (!firstUser) {
+              //firstUser = chat.other;
+              //client.emit('leave chat');
+              //client.on('chat finished', function() {
+                //client.emit('request chat');
+              //});
+              //return ;
+            //}
 
-            expect(chat.other).toNotEqual(firstUser);
-            done();
-          });
-        });
-    });
+            //expect(chat.other).toNotEqual(firstUser);
+            //done();
+          //});
+        //});
+    //});
 
     it('disconnects a user when he has quit', function(done) {
       createClient({ nickname: 'first' }).then(function(client) {
