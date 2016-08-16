@@ -7,6 +7,8 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import reducers from './reducers';
 
+require('reset.css');
+
 const container = document.getElementById('app');
 
 const middlewares = applyMiddleware(thunk, createLogger());
