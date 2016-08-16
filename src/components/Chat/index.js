@@ -35,13 +35,19 @@ export default class Chat extends Component {
     this.setState({ replyContent: value });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.messages !== this.props.messages) {
+      this._listMessages.scrollTo(0, this._listMessages.scrollHeight);
+    }
+  }
+
   render() {
     const { replyContent } = this.state;
     const { messages, chat } = this.props;
 
     return chat && !chat.loading ? (
       <div className={styles.Chat}>
-        <div className={styles.MessagesList}>
+        <div className={styles.MessagesList} ref={(c) => this._listMessages = c}>
           {renderMessages(messages)}
         </div>
 
