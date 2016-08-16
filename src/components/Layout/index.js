@@ -19,9 +19,6 @@ export default function Layout({ children, title = 'Hello Chat', onNextChat }) {
 
         {renderNewChat(title !== 'Hello Chat')}
 
-        <div className={styles.Logout}>
-          <LogoutIcon />
-        </div>
       </header>
 
       <div className={styles.MainContent}>{children}</div>
