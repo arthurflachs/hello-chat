@@ -37,9 +37,9 @@ export default class Chat extends Component {
 
   render() {
     const { replyContent } = this.state;
-    const { messages } = this.props;
+    const { messages, chat } = this.props;
 
-    return (
+    return chat && !chat.loading ? (
       <div className={styles.Chat}>
         <div className={styles.MessagesList}>
           {renderMessages(messages)}
@@ -56,6 +56,10 @@ export default class Chat extends Component {
             />
           </form>
         </div>
+      </div>
+    ) : (
+      <div className={styles.NoChat}>
+        <span>We are looking for someone...</span>
       </div>
     );
   }

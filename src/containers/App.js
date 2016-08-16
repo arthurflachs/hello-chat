@@ -17,7 +17,7 @@ function App({ chatClient, registerUser, replyChat, currentChat, chatMessages, n
   }
   return currentChat ? (
     <Layout title={currentChat.other && currentChat.other.nickname} onNextChat={nextChat.bind(null, currentChat, chatClient)}>
-      <Chat messages={chatMessages} onReply={reply} />
+      <Chat messages={chatMessages} onReply={reply} chat={currentChat} />
     </Layout>
   ) : (
     <Welcome onStartChat={registerUser}/>
