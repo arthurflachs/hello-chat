@@ -17,6 +17,11 @@
 
 .NewChat {
   padding: 0 1em;
+  cursor: pointer;
+}
+
+.NewChat:hover {
+  color: #9ea90a;
 }
 
 .MainContent {
