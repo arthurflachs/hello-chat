@@ -6,7 +6,6 @@ export default function Message({ content, self = false }) {
 
   return (
     <div className={MessageClassName}>
-      <div className={styles.MessageAvatar}></div>
       <div className={styles.MessageContent}>
         <span>{ content }</span>
       </div>

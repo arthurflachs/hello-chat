@@ -1,4 +1,4 @@
 const { createServer } = require('../src/server');
-const { argv } = require('yargs');
+const config = require('../config');
 
-createServer(argv.port, argv.host);
+createServer(config.serverPort, config.serverHost);

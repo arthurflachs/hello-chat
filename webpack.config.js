@@ -1,8 +1,10 @@
+const path = require('path');
+
 module.exports = {
-  entry: './src/index.js',
+  entry: path.resolve('./src/index.js'),
 
   output: {
-    path: './dist',
+    path: path.resolve('./dist'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -15,5 +17,11 @@ module.exports = {
       { test: /\.css$/, loader: 'style!css?modules&localIdentName=[path][name]---[local]', exclude: /node_modules/ },
       { test: /\.css$/, loader: 'style!css', include: /node_modules/ },
     ],
+  },
+
+  devServer: {
+    proxy: {
+      '/socket.io': 'http://localhost:12222',
+    },
   },
 };

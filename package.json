@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently 'npm run start:ui' 'npm run start:server' 'npm run storybook'",
-    "start:ui": "webpack-dev-server --inline --hot",
+    "start:ui": "node ./bin/devServer.js",
     "start:server": "babel-node ./bin/server-runner.js",
     "test": "mocha --compilers js:babel-register --recursive",
     "storybook": "start-storybook -p 9001"

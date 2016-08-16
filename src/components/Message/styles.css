@@ -1,12 +1,15 @@
 .Message {
   display: flex;
   margin-bottom: 1em;
+  padding-right: 3em;
 }
 
 .Message_Self {
   composes: Message;
 
   flex-direction: row-reverse;
+  padding-right: 0;
+  padding-left: 3em;
 }
 
 .MessageAvatar {
@@ -18,12 +21,12 @@
 }
 
 .Message_Self .MessageContent {
-  background-color: blue;
+  background-color: #7676ca;
 }
 
 .MessageContent {
   flex: 1;
-  background-color: green;
+  background-color: #9ea90a;
   padding: 1em;
   border: 1px solid #333;
 }

@@ -3,6 +3,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: #443d3d;
 }
 
 .MessagesList {

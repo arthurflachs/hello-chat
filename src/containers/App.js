@@ -5,10 +5,10 @@ import Welcome from '../components/Welcome';
 import Layout from '../components/Layout';
 import Chat from '../components/Chat';
 import { registerUser, newChat, message, leaveChat } from '../actions';
+import config from '../../config';
 
 function App({ chatClient, registerUser, replyChat, currentChat, chatMessages, nextChat }) {
   function reply(messageContent) {
-    console.log('OH?!', currentChat)
     if (!typeof replyChat === 'function' || !currentChat || currentChat.loading) {
       return null;
     }
@@ -29,7 +29,7 @@ const mapStateToProps = ({ currentChat, chatMessages, chatClient }) =>
 
 const mapDispatchToProps = (dispatch, props) => ({
   registerUser: function(nickname) {
-    const socket = io('http://localhost:12222');
+    const socket = io(`//${config.serverHost}:${config.serverPort}`);
 
     return dispatch(registerUser(nickname, socket)).then(function(client) {
       return dispatch(newChat(client.chatClient));

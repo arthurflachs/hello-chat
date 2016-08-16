@@ -9,7 +9,9 @@ export function createServer(port = 12222, host = '127.0.0.1') {
   const app = http.createServer();
   const io = require('socket.io')(app);
 
-  app.listen(port, host);
+  app.listen(port, host, function() {
+    console.log(`server listening on ${host}:${port}`);
+  });
 
   io.on('connection', socket => handleConnection(socket));
 
