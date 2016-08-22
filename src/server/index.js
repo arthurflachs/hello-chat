@@ -73,6 +73,9 @@ export function createServer(port = 12222, host = '127.0.0.1') {
 
     const otherSocket = usersSocket.get(other);
 
+    otherSocket.removeAllListeners('disconnect');
+    otherSocket.removeAllListeners('disconnect');
+
     otherSocket.removeAllListeners('send message');
     otherSocket.removeAllListeners('leave chat');
 
